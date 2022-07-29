@@ -97,7 +97,10 @@
   </div>
 </div>
 
-<div [ngClass]="'content-container'">
+<div
+  [ngClass]="'content-container'"
+  [ngStyle]="{ 'margin-left': isSidebarExpanded ? '240px' : '90px' }"
+>
   <app-header></app-header>
   <div [ngClass]="'main-content'">
     <router-outlet></router-outlet>

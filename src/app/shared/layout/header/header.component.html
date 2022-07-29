@@ -1,1 +1,13 @@
-
+<div [ngClass]="'header-container'">
+  <div [ngClass]="'header-wrapper'">
+    <img src="assets/images/info-icon.png" alt="info" />
+    <img src="assets/images/noti-icon.png" alt="noti" />
+    <div [ngClass]="'user-wrapper'">
+      <div [ngClass]="'avatar'">
+        <img *ngIf="user.picture" src="{{ user.picture }}" alt="user-picture" />
+      </div>
+      <div>{{ user.name }}</div>
+      <img src="assets/images/arrow-black.png" alt="arrow" />
+    </div>
+  </div>
+</div>
