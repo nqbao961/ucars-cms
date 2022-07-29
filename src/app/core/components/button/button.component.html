@@ -1,0 +1,13 @@
+<button
+  [type]="type"
+  (click)="onClick()"
+  [disabled]="isDisabled"
+  [ngClass]="{
+    primary: type === 'primary',
+    outline: type === 'outline',
+    transparent: type === 'transparent',
+    disabled: isDisabled
+  }"
+>
+  <ng-content></ng-content>
+</button>
