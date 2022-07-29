@@ -1,6 +1,5 @@
-import { Routes } from '@angular/router';
+import { Route } from '@angular/router';
 import {
-  BrandDetailsComponent,
   CarBrandsComponent,
   ModulesComponent,
   NotificationComponent,
@@ -8,30 +7,25 @@ import {
 } from 'src/app/pages';
 import { MenuItemComponent } from 'src/app/pages/menu-item/menu-item.component';
 
-export const navRoutes: Routes = [
+export interface RouteWithIcon extends Route {
+  iconSrc?: string;
+  alt?: string;
+  children?: RouteWithIcon[];
+}
+
+export const navRoutes: RouteWithIcon[] = [
   {
     path: 'car-brands',
     title: 'Car Brands',
+    iconSrc: 'assets/images/car.png',
+    alt: 'car',
     component: CarBrandsComponent,
-  },
-  {
-    path: 'modules',
-    title: 'Modules',
-    component: ModulesComponent,
-  },
-  {
-    path: 'notification',
-    title: 'Notification',
-    component: NotificationComponent,
-  },
-  {
-    path: 'tasks',
-    title: 'Tasks',
-    component: TasksComponent,
   },
   {
     path: '',
     title: 'Folder',
+    iconSrc: 'assets/images/calendar.png',
+    alt: 'calendar',
     children: [
       {
         path: 'menu-item-1',
@@ -54,5 +48,26 @@ export const navRoutes: Routes = [
         component: MenuItemComponent,
       },
     ],
+  },
+  {
+    path: 'tasks',
+    title: 'Tasks',
+    iconSrc: 'assets/images/calendar.png',
+    alt: 'calendar',
+    component: TasksComponent,
+  },
+  {
+    path: 'modules',
+    title: 'Modules',
+    iconSrc: 'assets/images/calendar.png',
+    alt: 'calendar',
+    component: ModulesComponent,
+  },
+  {
+    path: 'notification',
+    title: 'Notification',
+    iconSrc: 'assets/images/calendar.png',
+    alt: 'calendar',
+    component: NotificationComponent,
   },
 ];

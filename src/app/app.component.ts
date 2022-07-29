@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { navRoutes } from './services/router';
-import { Routes } from '@angular/router';
+import { navRoutes, RouteWithIcon } from './services/router';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +7,21 @@ import { Routes } from '@angular/router';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  navRoutes: Routes = [];
+  navRoutes: RouteWithIcon[] = [];
+  isSidebarExpanded = true;
+  isFolderExpanded = true;
 
   ngOnInit(): void {
     this.navRoutes = navRoutes;
+  }
+
+  onToggleSidebar() {
+    this.isSidebarExpanded && (this.isFolderExpanded = false);
+    this.isSidebarExpanded = !this.isSidebarExpanded;
+  }
+
+  onToggleFolder() {
+    !this.isFolderExpanded && (this.isSidebarExpanded = true);
+    this.isFolderExpanded = !this.isFolderExpanded;
   }
 }

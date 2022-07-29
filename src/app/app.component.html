@@ -1,14 +1,105 @@
-<ul>
-  <li><a routerLink="car-brands">Car Brands</a></li>
-  <li><a routerLink="tasks">Tasks</a></li>
-  <li><a routerLink="modules">Modules</a></li>
-  <li><a routerLink="notification">Notification</a></li>
-  <li><a routerLink="setting">Setting</a></li>
-  <li *ngFor="let route of navRoutes">
-    <a routerLink="{{route.path}}">{{route.title}}</a>
-  </li>
-</ul>
-<div>
+<div
+  [ngClass]="{ 'sidebar-container': true, collaped: !isSidebarExpanded }"
+  [ngStyle]="{ width: isSidebarExpanded ? '240px' : '90px' }"
+>
+  <div [ngClass]="'logo-wrapper'">
+    <img
+      *ngIf="isSidebarExpanded; else elseBlock"
+      src="assets/images/ucars-logo.png"
+      alt="logo"
+    />
+    <ng-template #elseBlock>
+      <img src="assets/images/ucars-logo-small.png" alt="logo" />
+    </ng-template>
+    <img
+      [ngClass]="'toggle-button'"
+      src="assets/images/menu-fold.png"
+      alt="menu-fold"
+      (click)="onToggleSidebar()"
+    />
+  </div>
+
+  <div [ngClass]="'nav-wrapper'">
+    <ul [ngClass]="'nav-list'">
+      <li *ngFor="let route of navRoutes">
+        <ul
+          [ngClass]="'nav-list'"
+          *ngIf="route.children !== undefined; else elseBlock"
+        >
+          <li
+            [ngClass]="{ 'nav-item': true, collaped: !isFolderExpanded }"
+            (click)="onToggleFolder()"
+            title="{{ route.title }}"
+          >
+            <img
+              *ngIf="route.iconSrc"
+              src="{{ route.iconSrc }}"
+              alt="{{ route.alt }}"
+            />
+            <div *ngIf="isSidebarExpanded" [ngClass]="'nav-item-title'">
+              {{ route.title }}
+            </div>
+            <img
+              *ngIf="isSidebarExpanded"
+              [ngClass]="'arrow'"
+              src="assets/images/arrow-gray.png"
+              alt="arrow"
+            />
+          </li>
+
+          <div [ngClass]="'children-wrapper'" *ngIf="isFolderExpanded">
+            <li *ngFor="let childRoute of route.children">
+              <a
+                [ngClass]="'nav-item'"
+                routerLink="{{ childRoute.path }}"
+                routerLinkActive="active"
+                title="{{ childRoute.title }}"
+                >{{ childRoute.title }}</a
+              >
+            </li>
+          </div>
+        </ul>
+        <ng-template #elseBlock>
+          <a
+            [ngClass]="'nav-item'"
+            routerLink="{{ route.path }}"
+            routerLinkActive="active"
+            title="{{ route.title }}"
+          >
+            <img
+              *ngIf="route.iconSrc"
+              src="{{ route.iconSrc }}"
+              alt="{{ route.alt }}"
+            />
+            <div *ngIf="isSidebarExpanded" [ngClass]="'nav-item-title'">
+              {{ route.title }}
+            </div>
+          </a>
+        </ng-template>
+      </li>
+    </ul>
+
+    <ul [ngClass]="'last-nav'">
+      <li>
+        <a
+          [ngClass]="'nav-item'"
+          routerLink="setting"
+          routerLinkActive="active"
+          title="Setting"
+        >
+          <img src="assets/images/setting.png" alt="setting" />
+          <div *ngIf="isSidebarExpanded" [ngClass]="'nav-item-title'">
+            Setting
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div [ngClass]="'content-container'">
   <app-header></app-header>
-  <router-outlet></router-outlet>
+  <div [ngClass]="'main-content'">
+    <router-outlet></router-outlet>
+  </div>
 </div>
