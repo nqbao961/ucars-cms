@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared';
-
 import { CoreModule } from './core';
 import {
   BrandDetailsComponent,
@@ -16,6 +14,7 @@ import {
   TasksComponent,
 } from './pages';
 import { MenuItemComponent } from './pages/menu-item/menu-item.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,7 +28,14 @@ import { MenuItemComponent } from './pages/menu-item/menu-item.component';
     BrandDetailsComponent,
     MenuItemComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, SharedModule, CoreModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    SharedModule,
+    CoreModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

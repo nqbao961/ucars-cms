@@ -1,1 +1,9 @@
 <p>car-brands works!</p>
+<form [formGroup]="customInputForm">
+  <app-input
+    mode="search"
+    placeholder="asdas"
+    formControlName="email"
+    [errors]="emailErrors"
+  ></app-input>
+</form>

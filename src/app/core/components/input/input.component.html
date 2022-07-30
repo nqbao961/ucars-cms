@@ -1,0 +1,50 @@
+<div
+  [ngClass]="{
+    container: true,
+    invalid: errors && errors.length > 0,
+    disabled: disabled
+  }"
+>
+  <label *ngIf="label">{{ label }}</label>
+
+  <ng-template
+    *ngIf="mode === 'textarea'; then thenBlock; else elseBlock"
+  ></ng-template>
+  <ng-template #thenBlock>
+    <textarea
+      [placeholder]="placeholder"
+      [value]="value"
+      [disabled]="disabled"
+      (input)="onChange($any($event.target).value)"
+      (blur)="onTouched()"
+    ></textarea>
+  </ng-template>
+
+  <ng-template #elseBlock>
+    <div ngClass="inputWrapper">
+      <img
+        *ngIf="mode === 'search'"
+        src="assets/images/search.png"
+        alt="search"
+        ngClass="searchIcon"
+      />
+      <input
+        [ngClass]="{ search: mode === 'search' }"
+        [type]="type"
+        [placeholder]="placeholder"
+        [value]="value"
+        [disabled]="disabled"
+        (input)="onChange($any($event.target).value)"
+        (blur)="onTouched()"
+      />
+    </div>
+  </ng-template>
+
+  <ng-template [ngIf]="errors && errors.length > 0">
+    <div ngClass="errorWrapper">
+      <span *ngFor="let error of errors">
+        {{ error }}
+      </span>
+    </div>
+  </ng-template>
+</div>
