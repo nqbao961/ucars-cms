@@ -4,37 +4,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared';
 import { CoreModule } from './core';
-import {
-  BrandDetailsComponent,
-  CarBrandsComponent,
-  ModulesComponent,
-  NotificationComponent,
-  PageNotFoundComponent,
-  SettingComponent,
-  TasksComponent,
-} from './pages';
-import { MenuItemComponent } from './pages/menu-item/menu-item.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PagesModule } from './pages';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    CarBrandsComponent,
-    TasksComponent,
-    ModulesComponent,
-    NotificationComponent,
-    SettingComponent,
-    PageNotFoundComponent,
-    BrandDetailsComponent,
-    MenuItemComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    PagesModule,
     SharedModule,
     CoreModule,
-    FormsModule,
-    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

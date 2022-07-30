@@ -5,3 +5,5 @@ export * from './setting/setting.component';
 export * from './tasks/tasks.component';
 export * from './page-not-found/page-not-found.component';
 export * from './brand-details/brand-details.component';
+export * from './menu-item/menu-item.component';
+export * from './pages.module';
