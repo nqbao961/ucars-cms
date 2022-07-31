@@ -1,0 +1,12 @@
+<div ngClass="title">
+  <div ngClass="title-wrapper">
+    <div ngClass="title-text">Add Car Brand</div>
+    <span>Setup new car brand</span>
+  </div>
+  <img (click)="closeDialog()" src="assets/images/close.png" alt="close" />
+</div>
+<app-brand-details-content
+  [mode]="'add'"
+  (onAddBrand)="add($event)"
+  (onClose)="closeDialog()"
+></app-brand-details-content>

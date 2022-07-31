@@ -94,3 +94,18 @@ textarea {
     color: var(--red);
   }
 }
+
+.textarea-value,
+.input-value {
+  font-weight: 600;
+  padding: 9px 0;
+}
+
+.textarea-value {
+  width: 552px;
+  min-height: 100px;
+}
+
+.input-value {
+  width: 240px;
+}

@@ -1,0 +1,108 @@
+<div ngClass="container">
+  <div ngClass="section">
+    <div ngClass="title">Brand Logo</div>
+    <div ngClass="uploadContainer">
+      <input
+        *ngIf="mode !== 'readonly'"
+        ngClass="fileInput"
+        type="file"
+        accept="image/png, image/jpeg"
+        title=""
+        (change)="handleFileUpload($any($event.target).files)"
+      />
+      <div
+        ngClass="uploadLogo"
+        *ngIf="currentBrand.logo === ''; else elseBlock"
+      >
+        <img src="assets/images/add-black.png" alt="add" />
+        <span>Brand Logo</span>
+      </div>
+      <ng-template #elseBlock>
+        <div
+          ngClass="previewImage"
+          [ngStyle]="{ 'background-image': 'url(' + currentBrand.logo + ')' }"
+        >
+          <div ngClass="hoverLogo">CHANGE LOGO</div>
+        </div>
+      </ng-template>
+    </div>
+    <div *ngIf="isShowUploadError && !currentBrand.logo" ngClass="error">
+      Please upload logo!
+    </div>
+  </div>
+
+  <form [formGroup]="detailsForm" ngClass="section">
+    <div ngClass="title">Brand Details</div>
+
+    <div ngClass="name-status-wrapper">
+      <app-input
+        [readonly]="mode === 'readonly'"
+        label="Brand Name"
+        placeholder="Input content"
+        formControlName="name"
+        [errors]="errors"
+      ></app-input>
+      <div ngClass="status-wrapper">
+        <span>Brand Status</span>
+        <div
+          [ngClass]="{ 'status-button': true, active: currentBrand.status }"
+          (click)="toggleDropdown()"
+          appClickOutside
+          (clickOutside)="isShowDropdown = false"
+        >
+          <img
+            [src]="
+              currentBrand.status
+                ? 'assets/images/status-active.png'
+                : 'assets/images/status-inactive.png'
+            "
+            alt="status"
+          />
+          <div>{{ currentBrand.status ? "Active" : "Inactive" }}</div>
+          <img
+            *ngIf="mode !== 'readonly'"
+            src="assets/images/arrow-black.png"
+            alt="arrow"
+          />
+
+          <div *ngIf="isShowDropdown && mode !== 'readonly'" ngClass="dropdown">
+            <div ngClass="option" (click)="setStatus(true)">
+              <div ngClass="status-button active">
+                <img src="assets/images/status-active.png" alt="active" />
+                Active
+              </div>
+            </div>
+            <div ngClass="option" (click)="setStatus(false)">
+              <div ngClass="status-button">
+                <img src="assets/images/status-inactive.png" alt="inactive" />
+                Inactive
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <app-input
+      [readonly]="mode === 'readonly'"
+      label="Brand Description"
+      mode="textarea"
+      placeholder="Input content"
+      formControlName="description"
+    ></app-input>
+  </form>
+
+  <div ngClass="action-wrapper">
+    <app-button *ngIf="mode === 'edit'" (handleClick)="submit()"
+      >Save Changes</app-button
+    >
+    <app-button *ngIf="mode === 'readonly'" (handleClick)="switchToEditMode()"
+      >Edit Information</app-button
+    >
+
+    <div *ngIf="mode === 'add'" ngClass="actions">
+      <app-button type="outline" (handleClick)="close()">Cancel</app-button>
+      <app-button (handleClick)="submit()">Create Brand</app-button>
+    </div>
+  </div>
+</div>

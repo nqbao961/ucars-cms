@@ -11,10 +11,11 @@ import {
   TasksComponent,
   MenuItemComponent,
 } from './';
+import { BrandDetailsModule } from './brand-details/brand-details.module';
 import { CarBrandsModule } from './car-brands/car-brands.module';
 
 @NgModule({
-  imports: [CommonModule, CarBrandsModule, CoreModule],
+  imports: [CommonModule, CarBrandsModule, CoreModule, BrandDetailsModule],
   declarations: [
     BrandDetailsComponent,
     CarBrandsComponent,
@@ -25,6 +26,6 @@ import { CarBrandsModule } from './car-brands/car-brands.module';
     TasksComponent,
     MenuItemComponent,
   ],
-  exports: [CarBrandsModule],
+  exports: [CarBrandsModule, BrandDetailsModule],
 })
 export class PagesModule {}

@@ -1,0 +1,11 @@
+.title {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 24px;
+
+  img {
+    transform: rotate(90deg);
+  }
+}

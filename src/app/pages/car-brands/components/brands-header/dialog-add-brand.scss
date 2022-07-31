@@ -1,0 +1,25 @@
+.title {
+  margin: -24px -24px 24px -24px;
+  padding: 16px 24px;
+  background-color: var(--status-background);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: inset 0px -1px 0px var(--gray2);
+
+  img {
+    cursor: pointer;
+  }
+}
+
+.title-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.title-text {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+}

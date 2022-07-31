@@ -21,6 +21,7 @@ export class InputComponent implements OnInit, ControlValueAccessor {
   @Input() type: 'text' | 'email' | 'password' = 'text';
   @Input() mode: 'text' | 'textarea' | 'search' = 'text';
   @Input() disabled = false;
+  @Input() readonly = false;
   @Output() handleChange = new EventEmitter();
 
   value: any = '';
@@ -55,4 +56,7 @@ export class InputComponent implements OnInit, ControlValueAccessor {
 
   onChange(value: any) {}
   onTouched() {}
+  changeValue(value: any) {
+    this.value = value;
+  }
 }

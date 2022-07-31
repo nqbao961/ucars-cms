@@ -1,1 +1,9 @@
-<p>brand-details works!</p>
+<div ngClass="title" (click)="navigateToCarBrands()">
+  <img src="assets/images/arrow-black.png" alt="arrow" />
+  <h1>Brand Details</h1>
+</div>
+<app-brand-details-content
+  [brand]="brand"
+  [mode]="mode"
+  (onEditBrand)="updateBrand($event)"
+></app-brand-details-content>

@@ -12,12 +12,19 @@
   ></ng-template>
   <ng-template #thenBlock>
     <textarea
+      *ngIf="readonly === false; else elseBlock"
       [placeholder]="placeholder"
       [value]="value"
       [disabled]="disabled"
-      (input)="onChange($any($event.target).value)"
+      (input)="
+        onChange($any($event.target).value);
+        changeValue($any($event.target).value)
+      "
       (blur)="onTouched()"
     ></textarea>
+    <ng-template #elseBlock>
+      <div ngClass="textarea-value">{{ value }}</div>
+    </ng-template>
   </ng-template>
 
   <ng-template #elseBlock>
@@ -29,14 +36,21 @@
         ngClass="searchIcon"
       />
       <input
+        *ngIf="readonly === false; else elseBlock"
         [ngClass]="{ search: mode === 'search' }"
         [type]="type"
         [placeholder]="placeholder"
         [value]="value"
         [disabled]="disabled"
-        (input)="onChange($any($event.target).value)"
+        (input)="
+          onChange($any($event.target).value);
+          changeValue($any($event.target).value)
+        "
         (blur)="onTouched()"
       />
+      <ng-template #elseBlock>
+        <div ngClass="input-value">{{ value }}</div>
+      </ng-template>
     </div>
   </ng-template>
 
