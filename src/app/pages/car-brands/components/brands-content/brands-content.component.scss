@@ -99,6 +99,10 @@ tr:last-child {
   padding: 0 40px;
   border-right: 2px solid var(--status-inactive);
 
+  &.active {
+    border-right: 2px solid var(--divider-active);
+  }
+
   .logo-image {
     width: 64px;
     height: 64px;

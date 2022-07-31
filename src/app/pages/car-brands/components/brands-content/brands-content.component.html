@@ -7,7 +7,8 @@
     <col />
     <col ngClass="fit" />
   </colgroup>
-  <tr>
+  <div *ngIf="brands.length === 0">No result found!</div>
+  <tr *ngFor="let brand of brands">
     <td>
       <label class="checkbox-container">
         <input ngClass="checkbox" type="checkbox" />
@@ -15,122 +16,36 @@
       </label>
     </td>
     <td>
-      <div ngClass="logo-wrapper">
-        <img
-          ngClass="logo-image"
-          src="assets/images/ucars-logo.png"
-          alt="brand-logo"
-        />
+      <div [ngClass]="{ 'logo-wrapper': true, active: brand.status }">
+        <img ngClass="logo-image" [src]="brand.logo" alt="brand-logo" />
       </div>
     </td>
     <td>
       <div ngClass="brand-info-container">
-        <h2>Toyota</h2>
+        <h2>{{ brand.name }}</h2>
         <div ngClass="brand-info-wrapper">
-          <span ngClass="brand-info-text"
-            >asdas asdas dasdas asdfsdf ssdfsdf sd sdfs df</span
-          >
+          <span ngClass="brand-info-text">{{ brand.description || "" }}</span>
           <div ngClass="brand-info-divider"></div>
-          <span ngClass="brand-number-models">1200 Models</span>
+          <span ngClass="brand-number-models"
+            >{{ brand.numberOfModels }} Models</span
+          >
         </div>
       </div>
     </td>
     <td>
       <div ngClass="update-date-text">Last Update</div>
-      <span>{{ today | date: "dd/MM/YYYY" }}</span>
+      <span>{{ brand.updateAt | date: "dd/MM/YYYY" }}</span>
     </td>
     <td>
-      <div [ngClass]="{ 'status-container': true, active: true }">
+      <div [ngClass]="{ 'status-container': true, active: brand.status }">
         <div ngClass="status-dot"></div>
-        Active
+        {{ brand.status ? "Active" : "Inactive" }}
       </div>
     </td>
     <td>
-      <app-button type="outline"> View Details </app-button>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <label class="checkbox-container">
-        <input ngClass="checkbox" type="checkbox" />
-        <span class="checkmark"></span>
-      </label>
-    </td>
-    <td>
-      <div ngClass="logo-wrapper">
-        <img
-          ngClass="logo-image"
-          src="assets/images/ucars-logo.png"
-          alt="brand-logo"
-        />
-      </div>
-    </td>
-    <td>
-      <div ngClass="brand-info-container">
-        <h2>Toyota</h2>
-        <div ngClass="brand-info-wrapper">
-          <span ngClass="brand-info-text"
-            >asdas asdas dasdas asdfsdf ssdfsdf sd sdfs df</span
-          >
-          <div ngClass="brand-info-divider"></div>
-          <span ngClass="brand-number-models">1200 Models</span>
-        </div>
-      </div>
-    </td>
-    <td>
-      <div ngClass="update-date-text">Last Update</div>
-      <span>{{ today | date: "dd/MM/YYYY" }}</span>
-    </td>
-    <td>
-      <div [ngClass]="{ 'status-container': true, active: true }">
-        <div ngClass="status-dot"></div>
-        Active
-      </div>
-    </td>
-    <td>
-      <app-button type="outline"> View Details </app-button>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <label class="checkbox-container">
-        <input ngClass="checkbox" type="checkbox" />
-        <span class="checkmark"></span>
-      </label>
-    </td>
-    <td>
-      <div ngClass="logo-wrapper">
-        <img
-          ngClass="logo-image"
-          src="assets/images/ucars-logo.png"
-          alt="brand-logo"
-        />
-      </div>
-    </td>
-    <td>
-      <div ngClass="brand-info-container">
-        <h2>Toyota</h2>
-        <div ngClass="brand-info-wrapper">
-          <span ngClass="brand-info-text"
-            >asdas asdas dasdas asdfsdf ssdfsdf sd sdfs df</span
-          >
-          <div ngClass="brand-info-divider"></div>
-          <span ngClass="brand-number-models">1200 Models</span>
-        </div>
-      </div>
-    </td>
-    <td>
-      <div ngClass="update-date-text">Last Update</div>
-      <span>{{ today | date: "dd/MM/YYYY" }}</span>
-    </td>
-    <td>
-      <div [ngClass]="{ 'status-container': true, active: true }">
-        <div ngClass="status-dot"></div>
-        Active
-      </div>
-    </td>
-    <td>
-      <app-button type="outline"> View Details </app-button>
+      <app-button type="outline" (handleClick)="navigateToDetails(brand.id)">
+        View Details
+      </app-button>
     </td>
   </tr>
 </table>

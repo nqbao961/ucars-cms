@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { CarBrand } from 'src/app/services/models';
 
 @Component({
   selector: 'app-brands-content',
@@ -6,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./brands-content.component.scss'],
 })
 export class BrandsContentComponent implements OnInit {
-  today = Date.now();
+  @Input() brands: CarBrand[] = [];
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
+
+  navigateToDetails(id: number) {
+    this.router.navigate(['car-brands', id]);
+  }
 }

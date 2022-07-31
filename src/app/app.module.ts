@@ -5,6 +5,9 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared';
 import { CoreModule } from './core';
 import { PagesModule } from './pages';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './services/in-memory-data.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -14,6 +17,10 @@ import { PagesModule } from './pages';
     PagesModule,
     SharedModule,
     CoreModule,
+    HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
+      dataEncapsulation: false,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],

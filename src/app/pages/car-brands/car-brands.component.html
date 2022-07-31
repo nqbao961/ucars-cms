@@ -1,2 +1,5 @@
-<app-brands-header></app-brands-header>
-<app-brands-content></app-brands-content>
+<app-brands-header
+  (onFetchBrands)="getFetchedBrands($event)"
+  (onAddBrand)="pushNewBrand($event)"
+></app-brands-header>
+<app-brands-content [brands]="brands"></app-brands-content>

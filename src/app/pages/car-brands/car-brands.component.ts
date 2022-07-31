@@ -1,6 +1,6 @@
-import { Component, OnInit, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { debounceTime } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { CarBrand } from 'src/app/services/models';
 
 @Component({
   selector: 'app-car-brands',
@@ -8,32 +8,15 @@ import { debounceTime } from 'rxjs';
   styleUrls: ['./car-brands.component.scss'],
 })
 export class CarBrandsComponent implements OnInit {
-  constructor(private formBuilder: FormBuilder) {}
+  brands: CarBrand[] = [];
 
-  customInputForm: FormGroup = this.formBuilder.group({
-    email: [''],
-  });
+  ngOnInit(): void {}
 
-  ngOnInit() {
-    this.email.valueChanges
-      .pipe(debounceTime(300))
-      .subscribe((selectedValue) => {
-        console.log(selectedValue);
-      });
+  getFetchedBrands(brands$: Observable<CarBrand[]>) {
+    brands$.subscribe((brands) => (this.brands = brands));
   }
 
-  get email() {
-    return this.customInputForm.get('email')!;
-  }
-
-  get emailErrors() {
-    const errorList = [];
-    if (this.email.touched) {
-      this.email.hasError('required') && errorList.push('Email is required!');
-      this.email.hasError('email') && errorList.push('Email is invalid!');
-      this.email.hasError('minlength') && errorList.push('minLength is 3!');
-    }
-
-    return errorList;
+  pushNewBrand(brand: CarBrand) {
+    this.brands.push(brand);
   }
 }

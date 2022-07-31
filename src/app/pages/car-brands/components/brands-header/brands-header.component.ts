@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { debounceTime } from 'rxjs';
+import { debounceTime, Observable } from 'rxjs';
+import { CarBrandService } from 'src/app/services/brand.service';
+import { CarBrand } from 'src/app/services/models';
 
 @Component({
   selector: 'app-brands-header',
@@ -8,20 +10,30 @@ import { debounceTime } from 'rxjs';
   styleUrls: ['./brands-header.component.scss'],
 })
 export class BrandsHeaderComponent implements OnInit {
+  brands$!: Observable<CarBrand[]>;
   isShowDropdown = false;
 
-  constructor(private formBuilder: FormBuilder) {}
+  @Output() onFetchBrands = new EventEmitter<Observable<CarBrand[]>>();
+  @Output() onAddBrand = new EventEmitter<CarBrand>();
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private carBrandService: CarBrandService
+  ) {}
 
   searchForm: FormGroup = this.formBuilder.group({
     search: [''],
   });
 
   ngOnInit() {
-    this.search.valueChanges
-      .pipe(debounceTime(300))
-      .subscribe((selectedValue) => {
-        console.log(selectedValue);
-      });
+    this.brands$ = this.carBrandService.getCarBrands();
+    this.onFetchBrands.emit(this.brands$);
+
+    this.search.valueChanges.pipe(debounceTime(300)).subscribe((value) => {
+      this.brands$ = this.carBrandService.searchCarBrands(value);
+      this.onFetchBrands.emit(this.brands$);
+      this.brands$.subscribe((brands) => console.log(brands));
+    });
   }
 
   get search() {
@@ -30,5 +42,17 @@ export class BrandsHeaderComponent implements OnInit {
 
   toggleDropdown() {
     this.isShowDropdown = !this.isShowDropdown;
+  }
+
+  add(name: string): void {
+    name = name.trim();
+    if (!name) {
+      return;
+    }
+    this.carBrandService
+      .addCarBrand({ name } as CarBrand)
+      .subscribe((brand) => {
+        this.onAddBrand.emit(brand);
+      });
   }
 }
