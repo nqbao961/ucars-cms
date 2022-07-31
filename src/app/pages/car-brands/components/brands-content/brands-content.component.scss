@@ -1,0 +1,170 @@
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td {
+  box-shadow: inset 0px -1px 0px #f1f1f1;
+  text-align: left;
+  padding: 30px 24px;
+  border-bottom: 8px solid var(--transparent);
+
+  &:first-child {
+    padding-right: 0;
+  }
+
+  &:nth-child(2) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  &:nth-child(3) {
+    padding-left: 40px;
+  }
+}
+
+tr:last-child {
+  td {
+    box-shadow: none;
+    border-bottom: none;
+  }
+}
+
+.fit {
+  width: 1%;
+  white-space: nowrap;
+}
+
+.checkbox-container {
+  display: block;
+  position: relative;
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  &:hover {
+    input ~ .checkmark {
+      background-color: var(--gray4);
+    }
+  }
+
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+
+    &:checked {
+      & ~ .checkmark {
+        border: 1px solid var(--primary);
+        background-color: var(--primary);
+
+        &:after {
+          display: block;
+        }
+      }
+    }
+  }
+
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 24px;
+    width: 24px;
+    border: 1px solid var(--gray1);
+    border-radius: 50%;
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 10px;
+      height: 10px;
+      background-color: var(--white);
+      border-radius: 50%;
+    }
+  }
+}
+
+.logo-wrapper {
+  display: flex;
+  padding: 0 40px;
+  border-right: 2px solid var(--status-inactive);
+
+  .logo-image {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+  }
+}
+
+.brand-info-container {
+  h2 {
+    margin-bottom: 4px;
+  }
+
+  .brand-info-wrapper {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .brand-info-text {
+    max-width: 195px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .brand-info-divider {
+    height: 16px;
+    border-right: 1px solid var(--gray3);
+  }
+
+  span.brand-number-models {
+    font-weight: 500;
+    color: var(--primary);
+  }
+}
+
+.update-date-text {
+  color: var(--text-primary);
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.status-container {
+  padding: 8px 20px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  color: var(--status-inactive);
+  background-color: var(--status-background);
+  border-radius: 4px;
+
+  .status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--status-inactive);
+  }
+
+  &.active {
+    color: var(--status-active);
+
+    .status-dot {
+      background-color: var(--status-active);
+    }
+  }
+}

@@ -1,1 +1,32 @@
-<p>brands-header works!</p>
+<div ngClass="container">
+  <div ngClass="left">
+    <h1>Car brands list</h1>
+    <div
+      ngClass="view-button"
+      appClickOutside
+      (clickOutside)="isShowDropdown = false"
+    >
+      <app-button type="transparent" (handleClick)="toggleDropdown()">
+        <img src="assets/images/arrow-black.png" alt="arrow" />
+        View All
+      </app-button>
+      <div *ngIf="isShowDropdown" [ngClass]="{ dropdown: true }">
+        <div>All</div>
+        <div>Last Updated</div>
+        <div>Brand Name</div>
+        <div>Number of Models</div>
+      </div>
+    </div>
+    <form [formGroup]="searchForm">
+      <app-input
+        mode="search"
+        placeholder="Search car brand"
+        formControlName="search"
+      ></app-input>
+    </form>
+  </div>
+  <app-button>
+    <img src="assets/images/add-white.png" alt="plus" />
+    Add Brand
+  </app-button>
+</div>

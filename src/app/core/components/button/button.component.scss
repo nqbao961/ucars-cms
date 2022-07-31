@@ -6,6 +6,7 @@ button {
   transition: all ease-in-out 0.2s;
   display: flex;
   gap: 12px;
+  white-space: nowrap;
 
   &.disabled {
     pointer-events: none;
